@@ -1,4 +1,4 @@
 #!/bin/bash
 
-#adding comments
+#adding comments changes added now 
 Echo "Second Hello Word"
