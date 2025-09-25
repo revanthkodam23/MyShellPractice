@@ -54,7 +54,7 @@ print_blue "Package list updated."
 
 
 # Install MySQL Server
-dnf list mysql      
+dnf list mysql &>>$LOGFILE
 if [ $? -eq 0 ]; then
     print_yellow "MySQL is already installed."
     
@@ -69,7 +69,7 @@ fi
 
 
 # Install Nginx
-dnf list nginx
+dnf list nginx &>>$LOGFILE
 if [ $? -eq 0 ]; then
     print_yellow "Nginx is already installed."
     
@@ -80,7 +80,7 @@ else
 fi
 
 # Install Python
-dnf list python3    
+dnf list python3 &>>$LOGFILE  
 if [ $? -eq 0 ]; then
     print_yellow "Python is already installed."
     
@@ -91,7 +91,7 @@ else
 fi
 
 # Install Node.js
-dnf list nodejs
+dnf list nodejs &>>$LOGFILE
 if [ $? -eq 0 ]; then
     print_yellow "Node.js is already installed."
     
