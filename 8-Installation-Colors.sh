@@ -42,24 +42,55 @@ fi
 dnf makecache
 
 # Install MySQL Server
-dnf install mysql -y 
+dnf list mysql 
+if [ $? -eq 0 ]; then
+    print_yellow "MySQL is already installed."
+    exit 0
+else
+    print_blue "MySQL is not installed. Proceeding with installation."
+    dnf install mysql -y
+    VALIDATE $? "MySQL"
+fi
+
 
 # Check installation status
-VALIDATE $? "MySQL"
+
 
 # Install Nginx
-dnf install nginx -y
-
-# Check installation status
-VALIDATE $? "Nginx"
+dnf list nginx
+if [ $? -eq 0 ]; then
+    print_yellow "Nginx is already installed."
+    exit 0
+else
+    print_blue "Nginx is not installed. Proceeding with installation."
+    dnf install nginx -y
+    VALIDATE $? "Nginx"
+fi
 
 # Install Python
-dnf install python3 -y
+dnf list python3    
+if [ $? -eq 0 ]; then
+    print_yellow "Python is already installed."
+    exit 0
+else
+    print_blue "Python is not installed. Proceeding with installation."
+    dnf install python3 -y
+    VALIDATE $? "Python"
+fi
 
-# Check installation status
-VALIDATE $? "Python"
 # Install Node.js
-dnf install nodejs -y
+dnf list nodejs
+if [ $? -eq 0 ]; then
+    print_yellow "Node.js is already installed."
+    exit 0
+else
+    print_blue "Node.js is not installed. Proceeding with installation."
+    dnf install nodejs -y
+    
+    # Check installation status
+    VALIDATE $? "Node.js"
+fi
 
-# Check installation status
-VALIDATE $? "Node.js"
+
+# End of script
+
