@@ -43,10 +43,10 @@ else
 fi
 }
 
-echo "script started at $(date)" >> $LOGFILE
+echo "script started at $(date)" &>>$LOGFILE
 
 # Update package list
-dnf makecache >> $LOGFILE 2>&1
+dnf makecache &>>$LOGFILE
 VALIDATE $? "Package list update"
 print_blue "Package list updated."
 # Install MySQL Server
@@ -60,7 +60,7 @@ if [ $? -eq 0 ]; then
     
 else
     print_blue "MySQL is not installed. Proceeding with installation."
-    dnf install mysql -y $>> $LOGFILE
+    dnf install mysql -y &>>$LOGFILE
     VALIDATE $? "MySQL"
 fi
 
@@ -75,7 +75,7 @@ if [ $? -eq 0 ]; then
     
 else
     print_blue "Nginx is not installed. Proceeding with installation."
-    dnf install nginx -y $>> $LOGFILE
+    dnf install nginx -y &>>$LOGFILE
     VALIDATE $? "Nginx"
 fi
 
@@ -86,7 +86,7 @@ if [ $? -eq 0 ]; then
     
 else
     print_blue "Python is not installed. Proceeding with installation."
-    dnf install python3 -y $>> $LOGFILE
+    dnf install python3 -y &>>$LOGFILE
     VALIDATE $? "Python"
 fi
 
@@ -97,11 +97,11 @@ if [ $? -eq 0 ]; then
     
 else
     print_blue "Node.js is not installed. Proceeding with installation."
-    dnf install nodejs -y $>> $LOGFILE
+    dnf install nodejs -y &>>$LOGFILE
     
     # Check installation status
     VALIDATE $? "Node.js"
 fi
 
-echo "script ended at $(date)" >> $LOGFILE
+echo "script ended at $(date)" &>>$LOGFILE
 # End of script
