@@ -45,7 +45,7 @@ dnf makecache
 dnf list mysql 
 if [ $? -eq 0 ]; then
     print_yellow "MySQL is already installed."
-    exit 0
+    
 else
     print_blue "MySQL is not installed. Proceeding with installation."
     dnf install mysql -y
@@ -60,7 +60,7 @@ fi
 dnf list nginx
 if [ $? -eq 0 ]; then
     print_yellow "Nginx is already installed."
-    exit 0
+    
 else
     print_blue "Nginx is not installed. Proceeding with installation."
     dnf install nginx -y
@@ -71,7 +71,7 @@ fi
 dnf list python3    
 if [ $? -eq 0 ]; then
     print_yellow "Python is already installed."
-    exit 0
+    
 else
     print_blue "Python is not installed. Proceeding with installation."
     dnf install python3 -y
@@ -82,7 +82,7 @@ fi
 dnf list nodejs
 if [ $? -eq 0 ]; then
     print_yellow "Node.js is already installed."
-    exit 0
+    
 else
     print_blue "Node.js is not installed. Proceeding with installation."
     dnf install nodejs -y
