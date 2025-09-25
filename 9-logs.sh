@@ -36,19 +36,19 @@ mkdir -p $LOGFOLDER
 
 VALIDATE(){
 if [ $1 -ne 0 ]; then
-  print_red "$2 installation failed."
+  print_red "$2 installation failed." | tee -a $LOGFILE
   exit 1
 else
-  print_green "$2 installed successfully."
+  print_green "$2 installed successfully." | tee -a $LOGFILE
 fi
 }
 
-echo "script started at $(date)" &>>$LOGFILE
+echo "script started at $(date)" &>>$LOGFILE | tee -a $LOGFILE
 
 # Update package list
 dnf makecache &>>$LOGFILE
-VALIDATE $? "Package list update"
-print_blue "Package list updated."
+VALIDATE $? "Package list update" | tee -a $LOGFILE
+print_blue "Package list updated." | tee -a $LOGFILE    
 # Install MySQL Server
 
 
@@ -56,10 +56,10 @@ print_blue "Package list updated."
 # Install MySQL Server
 dnf list mysql &>>$LOGFILE
 if [ $? -eq 0 ]; then
-    print_yellow "MySQL is already installed."
+    print_yellow "MySQL is already installed." | tee -a $LOGFILE
     
 else
-    print_blue "MySQL is not installed. Proceeding with installation."
+    print_blue "MySQL is not installed. Proceeding with installation." | tee -a $LOGFILE
     dnf install mysql -y &>>$LOGFILE
     VALIDATE $? "MySQL"
 fi
@@ -71,10 +71,10 @@ fi
 # Install Nginx
 dnf list nginx &>>$LOGFILE
 if [ $? -eq 0 ]; then
-    print_yellow "Nginx is already installed."
+    print_yellow "Nginx is already installed." | tee -a $LOGFILE
     
 else
-    print_blue "Nginx is not installed. Proceeding with installation."
+    print_blue "Nginx is not installed. Proceeding with installation." | tee -a $LOGFILE    
     dnf install nginx -y &>>$LOGFILE
     VALIDATE $? "Nginx"
 fi
@@ -82,10 +82,10 @@ fi
 # Install Python
 dnf list python3 &>>$LOGFILE  
 if [ $? -eq 0 ]; then
-    print_yellow "Python is already installed."
+    print_yellow "Python is already installed." | tee -a $LOGFILE
     
 else
-    print_blue "Python is not installed. Proceeding with installation."
+    print_blue "Python is not installed. Proceeding with installation." | tee -a $LOGFILE
     dnf install python3 -y &>>$LOGFILE
     VALIDATE $? "Python"
 fi
@@ -93,15 +93,15 @@ fi
 # Install Node.js
 dnf list nodejs &>>$LOGFILE
 if [ $? -eq 0 ]; then
-    print_yellow "Node.js is already installed."
+    print_yellow "Node.js is already installed." | tee -a $LOGFILE
     
 else
-    print_blue "Node.js is not installed. Proceeding with installation."
+    print_blue "Node.js is not installed. Proceeding with installation." | tee -a $LOGFILE
     dnf install nodejs -y &>>$LOGFILE
     
     # Check installation status
     VALIDATE $? "Node.js"
 fi
 
-echo "script ended at $(date)" &>>$LOGFILE
+echo "script ended at $(date)" &>>$LOGFILE | tee -a $LOGFILE
 # End of script
